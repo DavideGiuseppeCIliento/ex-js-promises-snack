@@ -38,3 +38,82 @@ function getPost(id) {
 }
 
 getPost(1).then((post) => console.log(post));
+
+// # 🏆 Snack 2
+
+function dadoRandomize() {
+  return Math.floor(Math.random() * 6) + 1;
+}
+
+// function lanciaDado() {
+//   console.log("Sto lanciando il dado...");
+//   return new Promise((resolve, reject) => {
+//     const problema = Math.random() < 0.2;
+//     const risultato = dadoRandomize();
+
+//     setTimeout(() => {
+//       problema
+//         ? reject("Si è incastrato il dado!")
+//         : resolve(`Il numero estratto è: ${risultato}`);
+//     }, 2000);
+//   });
+// }
+
+// lanciaDado()
+//   .then((messaggio) => console.log(messaggio))
+//   .catch((err) => console.error(err));
+
+// --- Bonus 2
+
+function lanciaDado() {
+  let ultimoLancio = 0;
+
+  return function creaLanciaDado() {
+    console.log("Sto lanciando il dado...");
+
+    return new Promise((resolve, reject) => {
+      const problema = Math.random() < 0.2;
+      const risultato = dadoRandomize();
+
+      setTimeout(() => {
+        if (problema) {
+          reject("Si è incastrato il dado!");
+        } else {
+          resolve(`Il numero estratto è: ${risultato}`);
+          if (ultimoLancio === risultato) {
+            console.log("Incredibile! Due volte lo stesso risultato!");
+          }
+        }
+
+        ultimoLancio = risultato;
+      }, 2000);
+    });
+  };
+}
+
+const lancio = lanciaDado(); // creo la closure
+
+// Usando la closure lancio() avrò sempre un unico scope
+lancio()
+  .then((messaggio) => console.log(messaggio))
+  .catch((err) => console.error(err));
+
+lancio()
+  .then((messaggio) => console.log(messaggio))
+  .catch((err) => console.error(err));
+
+lancio()
+  .then((messaggio) => console.log(messaggio))
+  .catch((err) => console.error(err));
+
+lancio()
+  .then((messaggio) => console.log(messaggio))
+  .catch((err) => console.error(err));
+
+lancio()
+  .then((messaggio) => console.log(messaggio))
+  .catch((err) => console.error(err));
+
+lancio()
+  .then((messaggio) => console.log(messaggio))
+  .catch((err) => console.error(err));
